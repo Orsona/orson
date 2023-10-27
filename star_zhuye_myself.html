@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主页</title>
+<style>
+    * {
+    padding:0;
+    margin:0;
+}
+li {
+    list-style: none;
+}
+/*对导航栏的设置*/
+.header{
+    display: flex;
+    background-color: rgb(150, 138, 138,0.8);
+    height: 60px;
+    width:100%;
+    flex-direction:row;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+.nav li{
+    display: inline;
+    width: 60px;
+    height: 60px;
+    background-color: brown;
+    text-align: center;
+    border-radius: 4px;
+}
+.nav a {
+    color:black;
+    text-decoration: none;
+}
+.nav a:hover {
+    text-decoration:underline;
+    background:rgb(175, 230, 143);
+}
+.self{ 
+    width: 100%;
+    height: 95vh;
+    background-color: yellowgreen;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.introduce{
+    background-color: yellowgreen;
+    width: 300px;
+    height: 100%;
+    margin: 8px;
+    margin-top: 300px;
+}
+.introduce h1{
+    font-size: 20px;
+    text-align:center;
+}
+.introduce p {
+    font-size: 12px;
+}
+</style>
+</head>
+<body>
+    <!--导航栏-->
+    <div class="header">
+    <ul class="nav">
+        <li ><a href="star_zhuye_myself.html">个人介绍</a></li>
+        <li ><a href="star_zhuye_turn.html">轮播图</a></li>
+        <li ><a href="star_zhuye_photo.html">照片</a></li>
+        <li ><a href="star_zhuye_understanding.html">理解</a></li>                
+    </ul>
+    </div>
+    <!--主体部分-->
+    <div class="self">
+        <div class="introduce">
+            <h1>基本信息</h1>
+            <p>&ensp;&ensp;各位学长学姐好，我叫吉永正，来自信息与软件工程学院0911班，毕业于重庆市第八中学校。
+                我的性格较为外向，积极开朗，待人真诚。我喜欢摄影，会打羽毛球和乒乓球，也会一些漂移板。
+                
+            </p>
+        </div>
+        <div class="introduce">
+            <h1>自我阐述</h1>
+            <p>&ensp;&ensp;我认为我有以下优点：
+                <br>&ensp;&ensp;1.有进取心，一直以来我都不断突破自我，去尝试自己不了解的事情，不断超越自我。
+                <br>&ensp;&ensp;2.有不错的沟通和表达能力，我能有效的与他人沟通协调，在集体中充当一个润滑剂的角色。同时有问题的解决能力，将问题拆分，逐步解决。
+                <br>&ensp;&ensp;3.有奉献意识和责任感。我在初高中被评为“优秀团员”，还在前段时间竞争成为第一批入党积极分子，我希望自己能够为集体，为国家作出一定的贡献。
+                <br>&ensp;&ensp;第四点算是一份缘分，因为高中三年，我们的年级主任一直给我们说：“去追那颗遥不可及的星。”我想，贵工作室就是我在大学里的其中一颗星。
+                <br>&ensp;&ensp;希望各位优秀的学长学姐能给我这样一个机会，一道在大学里发光发热。
+            </p>
+
+        </div> 
+    </div>   
+</body>
+</html>

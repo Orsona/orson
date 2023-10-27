@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="star_denglu.css">
+</head>
+<body>
+    <header>
+        <p>你好呀！！！</p>
+    </header> 
+
+    <section class="bingpai">
+        <div class="left">
+            <img src="tu6.jpg" alt="这是一个示例图片" width="100%" height="100%">
+        </div>
+        <div class="right">
+            <form class="denglu" id="registrationForm">
+            <h2>注册</h2>
+            <ul>
+                <li>用户名：<input type="username" id="loginUsername"></li>
+                <li>密&emsp;码：<input type="password" id="loginPassword"></li>
+                <li>邮&emsp;箱：<input type="email" required="required" id="email"></li>
+                <li><input type="submit" value="注册" id="registerButton"></li>
+                <li>已有帐户？<a href="star_denglu.html">点击登录</a></li>
+            </ul>
+        </form>
+        </div>
+    </section>
+    <footer>
+
+    </footer>
+    <script>
+        
+// 获取表单元素
+const form = document.getElementById('registrationForm');
+// 获取注册按钮元素
+const registerButton = document.getElementById('registerButton');
+
+// 注册按钮点击事件处理程序
+registerButton.addEventListener('click', function(event) {
+    event.preventDefault(); // 阻止表单默认提交行为
+
+    // 获取输入的数据
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
+    const email = document.getElementById('email').value;
+
+    // 创建一个包含用户数据的对象
+    const userData = {
+        username,
+        password,
+        email
+    };
+
+    // 将用户数据保存到本地存储
+    localStorage.setItem('userData', JSON.stringify(userData));
+
+    // 清空表单字段
+    form.reset();
+
+    alert('注册成功！');
+
+    // 跳转到 star_denglu.html 文件
+    window.location.href = 'star_denglu.html';
+});
+    </script>
+</body>
+</html>

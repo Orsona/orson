@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0">
+<title>page</title>
+<style>
+        /*初始化*/
+        *{
+        margin:0;   
+        padding:0;
+        text-decoration: none;
+        list-style: none;
+        }
+        /*下面的是对图片的设置*/
+        #banner{
+            width:800px;
+            height:400px;
+            border:2px solid #f1f1f1;
+            overflow: hidden;        
+            position:relative;
+        }
+        #imglist{
+            width:4000px;
+            height:400px; 
+        }
+        #imglist img{
+            width:800px;
+            height: 400px;
+        }
+        #imglist li{
+            float: left;
+        }
+       /*下面的是对按钮的设置*/
+       .prev{
+        background-color: grey;
+        width:30px;
+        height:40px;
+        color:white;
+        text-align: center;
+        line-height: 40px;
+        position:absolute;
+        left:5px;
+        top:45%;
+        cursor: pointer;
+        border-radius: 5px;
+       }
+       .next{
+       background-color: grey ;
+        width:30px;
+        height:40px;
+        color:white;
+        text-align: center;
+        line-height: 40px;
+        position:absolute;
+        right:5px;
+        top:45%;
+        cursor: pointer;
+        border-radius: 5px;
+       }
+       /*以下是对小圆点的设置*/
+       #icolist{            
+        position:absolute;
+        right:10px;
+        bottom:10px;
+       }
+       #icolist li {
+        width:30px;
+        height:30px;
+        border-radius: 50%;
+        background:#666;
+        text-align: center;
+        line-height:30px;
+        color:#fff;
+        float:left;
+        margin-left: 5px;
+        cursor: pointer;
+       }
+    </style>
+</head>
+<!--对<body>中图片和按钮的接入-->
+<body>
+    <div id="banner">
+        <ul id="imglist">
+            <li><img src=" morning.jpg"></li>
+            <li><img src="dusk.jpg"></li>
+            <li><img src="night.jpg"></li>
+            <li><img src="normal.png"></li>             
+            <li><img src="morning.jpg"></li>
+        </ul>
+        <!--做出轮播图中的四个小圆点-->
+        <ul id="icolist">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    <!--以下是对按钮的处理-->
+    <div   class="prev" >《</div>
+    <div   class="next" >》</div>
+    </div>
+<script>
+    //使用的语句：1.if条件语句2.for循环语句
+    //使用的函数：1.run函数    2.图片的改变   3.按钮的改变(对相应css的调整)   4.计算浮点数数学函数
+    //使用的事件：1.鼠标点击事件2.鼠标悬停事件
+    //需要清楚数值的计算，并通过var来使数值代入到函数当中
+    //难点：1.对于数值的计算2.理清轮播图的功能，并找到相应的函数
+    //大体分为三部分：1.时间2.点击事件3.位置获取及转换
+    var eprev= document.querySelector('.prev');
+    var enext= document.querySelector('.next');//对按钮元素的获取
+    var esico = document.getElementById('icolist').getElementsByTagName('li');//获取
+    var eicolist = document.querySelector('#icolist');//获得小圆点列表元素
+    var eimglist = document.querySelector('#imglist');//获得图片列表数据
+    var left=0;
+    var timer;
+    run();
+    function run(){
+        if(left <= -3200){//使得轮播图能够循环的关键，当向左划动3200px，就是四张图片后，重新回到第一张
+            left=0;
+        }
+        imglist.style.marginLeft = left + 'px'; 
+        var n = (left % 800 == 0) ? n = 1800 : n = 10;//?为三元运算符，在滚动时使得一张图片能够完整呈现后，就停顿1800毫秒
+        //也可以使用if条件语句
+        //具体形式为：
+        //var n;
+        //if (left % 800 == 0) {n = 1800;
+        //} else {n = 10;
+        //}
+        left -= 10;
+        timer = setTimeout(run,n);//计时器，在过去'n'后再调用一次run
+        var m =Math.floor(-left / 800);//定义一个m,使m的数值表示当前图片在轮播图的什么位置
+        icochange(m);//定义var m ，并在run函数调用icochange进行小圆点的变化
+    }
+    //做一个图片定位函数imgchange
+    function imgchange(n){
+        let lt = -(n * 800);//注意：不能再使用left来命名，不然会出现图片重复播放，但能通过命名lt，用'='来对left进行赋值
+        imglist.style.marginLeft = lt +'px';//修改left的值
+        left = lt;
+    }
+    eprev.onclick=function(){
+        let prevgo = Math.floor(-left / 800)-1;//获取当前位置，减去一，得到上一张   
+        if (prevgo == -1){     
+            prevgo = 3;  //在第一张图片再点击后就切换成第四张
+        }
+        imgchange(prevgo);//在点击后运行一次图片切换
+    }
+    enext.onclick=function(){
+        let nextgo = Math.floor(-left / 800) +1;//向下取整，加上一，得到下一张
+        if (nextgo == 4){    
+            nextgo = 0;   //在第四张图片时再点击就切换回第一张
+        }       
+        imgchange(nextgo);                                
+    }
+    function icochange(m){//让图片的对应数字随之变化
+        for (let index = 0; index< esico.length;index++){//让index在小于四个小圆点时继续通过++叠加
+             esico[index].style.backgroundColor =''//通过DOM操作，把圆点的背景色清空
+        }
+        if (m<esico.length){//（）里表示只有在m小于四个小圆点的数量时才会执行使当前小圆点变红的操作
+            esico[m].style.backgroundColor ='red';//把圆点的背景色变为红色
+        }
+    }
+    //创建列表元素点击事件,点击小圆点，跳转到相应页面
+    eicolist.onclick = function () {
+        var tg = event.target;
+        let ico = tg.innerHTML - 1;
+        imgchange(ico);//在点击后让图片和小圆点都随着改变
+        icochange(ico);
+    }
+    //鼠标在图片上停止轮播，离开后继续轮播
+    eimglist.onmouseover = function (){
+        clearTimeout(timer);
+    }
+    eimglist.onmouseout = function(){
+        run();
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

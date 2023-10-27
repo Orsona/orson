@@ -1,0 +1,63 @@
+* {
+    padding:0;
+    margin:0;
+}
+li {
+    list-style: none;
+}
+/*对导航栏的设置*/
+.header{
+    display: flex;
+    background-color: rgb(150, 138, 138,0.8);
+    height: 60px;
+    width:100%;
+    flex-direction:row;
+    justify-content: flex-end;
+    align-items: center;
+    position: fixed;/*将导航栏固定下来，不会随着上下而移动*/
+}
+.nav li{
+    display: inline;
+    width: 60px;
+    height: 60px;
+    background-color: brown;
+    text-align: center;
+    border-radius: 4px;
+}
+.nav a {
+    color:black;
+    text-decoration: none;
+}
+.nav a:hover {
+    text-decoration:underline;
+    background:rgb(175, 230, 143);
+}
+/*对中间部分的设置*/
+.section{
+    background-color: yellowgreen;
+    width:100%;
+    height:95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section_photo{
+    background-color: yellowgreen;
+    width: 810px;
+    height: 410px;
+    position: relative;
+    overflow: hidden;
+}
+iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.footer{
+    background-color: aqua;
+    width:100%;
+    height:40px;
+    text-align: center;
+}

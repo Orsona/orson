@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理解</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #one{
+            width: 100%;
+            height: 60px;
+            background-color: rgb(150, 138, 138,0.8);
+        }
+        a{
+            text-decoration: none;
+            color:red;
+        }
+        #one>ul li{
+            list-style: none;
+            float: left;
+            width:25%;
+            height:60px;
+            text-align: center;
+            line-height: 60px;
+            font-size: 25px;   
+        }
+        li:hover{
+            background-color: rgb(175, 230, 143);
+        }
+        a:hover{
+            color: blue;
+            font-size: larger;
+        }
+        #fetchDataButton {
+          margin-top: 60px;
+
+        }
+        /* 媒体查询*/
+@media screen and (max-width: 700px) {
+  #one ul {
+    display: none;
+  }
+  #one #menu {
+    display: block;
+    background-color: rgb(150, 138, 138);
+    color: black;
+    font-size: 35px;
+    border-radius: 4px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border: none;
+  }
+}
+@media screen and (min-width: 701px) {
+  #one #menu {
+    display: none;
+  }
+  #one ul {
+    display: block;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <!--导航栏-->
+    <div id="one">
+    <button id="menu"> &#9776;</button>
+    <ul id="nav">
+        <li ><a href="star_zhuye_myself.html">个人介绍</a></li>
+        <li ><a href="star_zhuye_turn.html">轮播图</a></li>
+        <li ><a href="star_zhuye_photo.html">照片</a></li>
+        <li ><a href="star_zhuye_understanding.html">理解</a></li>                
+    </ul>
+    <button id="fetchDataButton">点击获取数据</button>
+    <div id="userData"></div>
+    <script src="script.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const menuButton = document.getElementById("menu");
+  const navList = document.getElementById("nav");
+
+  menuButton.addEventListener("click", function() {    //没有实现将导航栏的排列方式变成竖向排列。
+    if (navList.style.display === "none" || navList.style.display === "") {
+      navList.style.display = "block";
+      navList.style.flexDirection = "column";
+    } else {
+      navList.style.display = "none";
+      navList.style.flexDirection = "row";
+    }
+  });
+});
+
+
+let dataReceived = false; // 标志来跟踪数据是否已接收
+
+// 获取按钮元素和用于显示数据的div元素
+const fetchDataButton = document.getElementById('fetchDataButton');
+const userDataDiv = document.getElementById('userData');
+
+// 点击按钮时执行的函数，获取API数据或删除数据
+fetchDataButton.addEventListener('click', () => {
+    if (!dataReceived) {
+        // 发送GET请求到API
+        fetch('https://631333b8a8d3f673ffc6500b.mockapi.io/users')
+            .then(response => response.json()) // 解析JSON响应
+            .then(data => {
+                // 在页面上显示数据
+                userDataDiv.innerHTML = JSON.stringify(data, null, 2);
+                dataReceived = true;
+                fetchDataButton.innerText = '撤回数据';
+            })
+            .catch(error => {
+                // 处理请求错误
+                userDataDiv.innerHTML = '请求出错：' + error;
+            });
+    } else {
+        // 删除已接收的数据
+        userDataDiv.innerHTML = '';
+        dataReceived = false;
+        fetchDataButton.innerText = '点击获取数据';
+    }
+});
+    </script>
+</body>
